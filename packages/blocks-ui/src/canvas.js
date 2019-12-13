@@ -1,4 +1,5 @@
 /** @jsx jsx */
+import { useState } from 'react'
 import { jsx, Styled } from 'theme-ui'
 import prettier from 'prettier/standalone'
 import parserJS from 'prettier/parser-babylon'
@@ -7,7 +8,7 @@ import { useEditor } from './editor-context'
 import InlineRender from './inline-render'
 import { PreviewArea, Device } from './device-preview'
 
-import { Clipboard, Check } from 'react-feather'
+import { Clipboard, Check, Edit2 } from 'react-feather'
 import { IconButton } from './ui'
 import useCopyToClipboard from './use-copy-to-clipboard'
 
@@ -30,7 +31,7 @@ const Copy = ({ toCopy }) => {
   return (
     <IconButton
       onClick={() => copyToClipboard(toCopy)}
-      sx={{ position: 'absolute', right: '-4px' }}
+      sx={{ position: 'absolute', right: '-4px', top: '20px' }}
     >
       {hasCopied ? (
         <Check sx={{ color: 'green' }} aria-label="Copied" />
@@ -43,6 +44,7 @@ const Copy = ({ toCopy }) => {
 
 export default ({ code, transformedCode, scope, theme }) => {
   const { mode } = useEditor()
+  const [ isEditable, setIsEditable ] = useState(false)
   const formattedCode = prettier.format(code, {
     parser: 'babel',
     plugins: [parserJS]
@@ -52,6 +54,16 @@ export default ({ code, transformedCode, scope, theme }) => {
     return (
       <Wrap>
         <Copy toCopy={formattedCode} />
+        <IconButton
+          onClick={() => setIsEditable(!isEditable)}
+          sx={{ position: 'absolute', right: '-4px' }}
+        >
+          {isEditable ? (
+            <Check size={16} aria-label="Done" />
+          ) : (
+            <Edit2 size={16} aria-label="Edit" />
+          )}
+        </IconButton>
         <Styled.pre
           language="js"
           sx={{
@@ -59,6 +71,7 @@ export default ({ code, transformedCode, scope, theme }) => {
             backgroundColor: 'white',
             color: 'black'
           }}
+          contentEditable={isEditable}
         >
           {formattedCode}
         </Styled.pre>
