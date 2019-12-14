@@ -31,12 +31,12 @@ const Copy = ({ toCopy }) => {
   return (
     <IconButton
       onClick={() => copyToClipboard(toCopy)}
-      sx={{ position: 'absolute', right: '-4px', top: '20px' }}
+      sx={{ position: 'absolute', right: '-4px', top: '30px' }}
     >
       {hasCopied ? (
-        <Check size={16} sx={{ color: 'green' }} aria-label="Copied" />
+        <Check size={20} sx={{ color: 'green' }} aria-label="Copied" />
       ) : (
-        <Clipboard size={16} aria-label="Copy" />
+        <Clipboard size={20} aria-label="Copy" />
       )}
     </IconButton>
   )
@@ -59,9 +59,9 @@ export default ({ code, transformedCode, scope, theme }) => {
           sx={{ position: 'absolute', right: '-4px' }}
         >
           {isEditable ? (
-            <Save size={16} aria-label="Done" />
+            <Save size={20} aria-label="Done" />
           ) : (
-            <Edit2 size={16} aria-label="Edit" />
+            <Edit2 size={20} aria-label="Edit" />
           )}
         </IconButton>
         <Styled.pre
