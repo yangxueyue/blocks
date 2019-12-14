@@ -8,7 +8,7 @@ import { useEditor } from './editor-context'
 import InlineRender from './inline-render'
 import { PreviewArea, Device } from './device-preview'
 
-import { Clipboard, Check, Edit2 } from 'react-feather'
+import { Clipboard, Check, Edit2, Save } from 'react-feather'
 import { IconButton } from './ui'
 import useCopyToClipboard from './use-copy-to-clipboard'
 
@@ -34,7 +34,7 @@ const Copy = ({ toCopy }) => {
       sx={{ position: 'absolute', right: '-4px', top: '20px' }}
     >
       {hasCopied ? (
-        <Check sx={{ color: 'green' }} aria-label="Copied" />
+        <Check size={16} sx={{ color: 'green' }} aria-label="Copied" />
       ) : (
         <Clipboard size={16} aria-label="Copy" />
       )}
@@ -44,7 +44,7 @@ const Copy = ({ toCopy }) => {
 
 export default ({ code, transformedCode, scope, theme }) => {
   const { mode } = useEditor()
-  const [ isEditable, setIsEditable ] = useState(false)
+  const [isEditable, setIsEditable] = useState(false)
   const formattedCode = prettier.format(code, {
     parser: 'babel',
     plugins: [parserJS]
@@ -59,7 +59,7 @@ export default ({ code, transformedCode, scope, theme }) => {
           sx={{ position: 'absolute', right: '-4px' }}
         >
           {isEditable ? (
-            <Check size={16} aria-label="Done" />
+            <Save size={16} aria-label="Done" />
           ) : (
             <Edit2 size={16} aria-label="Edit" />
           )}
