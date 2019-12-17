@@ -25,5 +25,22 @@ const Layout = props => {
 }
 
 export default () => (
-  <Editor src={JSX} blocks={Blocks} onChange={console.log} layout={Layout} />
+  <Editor
+    src={JSX}
+    blocks={Blocks}
+    layout={Layout}
+    onChange={code => {
+      console.log('fetchinggggg')
+      fetch('/___blocks', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          code,
+          page: 'foo.js'
+        })
+      })
+    }}
+  />
 )

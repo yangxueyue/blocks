@@ -9,14 +9,11 @@ exports.onCreateDevServer = ({ app, store }) => {
   const state = store.getState()
   const dirname = path.join(state.program.directory, 'src', 'pages')
 
-  //  const filename = path.join(dirname, 'theme.json')
-
-  //  console.log(dirname)
-
   app.use(bodyParser.json())
 
   app.post('/___blocks', async (req, res) => {
     const { code, page } = req.body
+    console.log(req.body)
     if (!code) {
       return res.status(500).send({
         error: 'Did not receive code'

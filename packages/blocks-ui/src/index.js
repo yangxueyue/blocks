@@ -18,38 +18,7 @@ import Header from './header'
 import Canvas from './canvas'
 import Layout from './layout'
 import SidePanel from './side-panel'
-
-// blocks app theme
-const appTheme = {
-  ...systemTheme,
-  colors: {
-    ...systemTheme.colors,
-    border: '#e1e6eb'
-  },
-  styles: {
-    ...systemTheme.styles,
-    navlink: {
-      color: 'inherit',
-      textDecoration: 'none',
-      fontWeight: 600
-    }
-  },
-  buttons: {
-    primary: {
-      color: 'background',
-      bg: 'primary',
-      '&:hover': {
-        bg: 'text'
-      }
-    },
-    secondary: {
-      color: 'text',
-      bg: 'background',
-      borderColor: 'text',
-      border: 'thin solid'
-    }
-  }
-}
+import appTheme from './theme'
 
 const BLOCKS_Droppable = props => {
   const { mode } = useEditor()
@@ -125,6 +94,7 @@ export default ({
   useEffect(() => {
     const newCode = transforms.addTuid(initialCode)
     setCode(newCode)
+    console.log('running teh new codez')
   }, [])
 
   useEffect(() => {
