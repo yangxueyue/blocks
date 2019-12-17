@@ -4,6 +4,7 @@ const util = require('util')
 const bodyParser = require('body-parser')
 
 const write = util.promisify(fs.writeFile)
+const read = util.promisify(fs.readFile)
 
 exports.onCreateDevServer = ({ app, store }) => {
   const state = store.getState()
@@ -21,7 +22,12 @@ exports.onCreateDevServer = ({ app, store }) => {
     }
 
     const filename = path.join(dirname, page)
-    await write(filename, code)
+    const currentCode = await read(filename, 'utf8')
+
+    if (code !== currentCode) {
+      await write(filename, code)
+    }
+
     res.send('ok beep')
   })
 }

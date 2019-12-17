@@ -30,6 +30,7 @@ export default () => (
     blocks={Blocks}
     layout={Layout}
     onChange={code => {
+      //return
       fetch('/___blocks', {
         method: 'POST',
         headers: {
@@ -45,4 +46,6 @@ export default () => (
 )
 
 if (module.hot) {
+  module.hot.decline('./foo.js')
+  module.hot.accept('../../.cache/sync-requires.js')
 }
