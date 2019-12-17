@@ -1,4 +1,4 @@
-import * as presets from '@theme-ui/presets'
+import { system as systemTheme } from '@theme-ui/presets'
 
 export default {
   ...systemTheme,

@@ -30,7 +30,6 @@ export default () => (
     blocks={Blocks}
     layout={Layout}
     onChange={code => {
-      console.log('fetchinggggg')
       fetch('/___blocks', {
         method: 'POST',
         headers: {
@@ -44,3 +43,6 @@ export default () => (
     }}
   />
 )
+
+if (module.hot) {
+}

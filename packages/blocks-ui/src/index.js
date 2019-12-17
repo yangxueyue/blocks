@@ -1,11 +1,10 @@
 /** @jsx jsx */
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { Styled, jsx } from 'theme-ui'
 import { system as systemTheme } from '@theme-ui/presets'
 
 import * as DEFAULT_BLOCKS from '@blocks/react'
-
 import * as themeComponents from '@theme-ui/components'
 
 import * as transforms from './transforms'
@@ -72,6 +71,10 @@ export default ({
   const [srcBlocks, setSrcBlocks] = useState([])
   const [theme, setTheme] = useState(defaultTheme)
 
+  const codeWithUuids = useMemo(() => {
+    return transforms.addTuid(initialCode)
+  }, [initialCode])
+
   const blocks = providedBlocks ? providedBlocks : DEFAULT_BLOCKS
 
   const scope = {
@@ -92,9 +95,7 @@ export default ({
   }
 
   useEffect(() => {
-    const newCode = transforms.addTuid(initialCode)
-    setCode(newCode)
-    console.log('running teh new codez')
+    setCode(codeWithUuids)
   }, [])
 
   useEffect(() => {

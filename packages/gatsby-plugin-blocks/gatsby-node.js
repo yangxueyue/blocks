@@ -13,8 +13,8 @@ exports.onCreateDevServer = ({ app, store }) => {
 
   app.post('/___blocks', async (req, res) => {
     const { code, page } = req.body
-    console.log(req.body)
-    if (!code) {
+
+    if (!code || !page) {
       return res.status(500).send({
         error: 'Did not receive code'
       })
