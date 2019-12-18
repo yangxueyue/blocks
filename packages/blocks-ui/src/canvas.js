@@ -4,6 +4,7 @@ import prettier from 'prettier/standalone'
 import parserJS from 'prettier/parser-babylon'
 
 import { useEditor } from './editor-context'
+import { useCode } from './code-context'
 import InlineRender from './inline-render'
 import { PreviewArea, Device } from './device-preview'
 
@@ -41,8 +42,9 @@ const Copy = ({ toCopy }) => {
   )
 }
 
-export default ({ code, transformedCode, scope, theme }) => {
+export default ({ scope, theme }) => {
   const { mode } = useEditor()
+  const { code, transformedCode } = useCode()
   const formattedCode = prettier.format(code, {
     parser: 'babel',
     plugins: [parserJS]

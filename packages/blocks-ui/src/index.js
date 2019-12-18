@@ -11,6 +11,7 @@ import * as transforms from './transforms'
 import * as queries from './queries'
 
 import { useEditor } from './editor-context'
+import CodeProvider from './code-context'
 import pragma from './pragma'
 
 import Header from './header'
@@ -21,11 +22,13 @@ import appTheme from './theme'
 
 const BLOCKS_Droppable = props => {
   const { mode } = useEditor()
+  console.log('rendering droppable')
   return <Droppable isDropDisabled={mode === 'viewports'} {...props} />
 }
 
 const BLOCKS_Draggable = ({ active, children, ...props }) => {
   const { mode } = useEditor()
+
   return (
     <Draggable isDragDisabled={mode === 'viewports'} {...props}>
       {(provided, snapshot) =>
@@ -51,6 +54,9 @@ const BLOCKS_Draggable = ({ active, children, ...props }) => {
   )
 }
 
+const BLOCKS_DroppableInner = props => <div {...props} />
+const BLOCKS_DraggableInner = props => <div {...props} />
+
 const defaultTheme = {
   ...systemTheme,
   breakpoints: [360, 600, 1024]
@@ -63,17 +69,10 @@ export default ({
   layout = 'div'
 }) => {
   const [code, setCode] = useState(null)
-  const [rawCode, setRawCode] = useState(null)
-  const [transformedCode, setTransformedCode] = useState(null)
   const [elementId, setElementId] = useState(null)
   const [elementData, setElementData] = useState(null)
   const [activeTab, setActiveTab] = useState(0)
-  const [srcBlocks, setSrcBlocks] = useState([])
   const [theme, setTheme] = useState(defaultTheme)
-
-  const codeWithUuids = useMemo(() => {
-    return transforms.addTuid(initialCode)
-  }, [initialCode])
 
   const blocks = providedBlocks ? providedBlocks : DEFAULT_BLOCKS
 
@@ -81,57 +80,14 @@ export default ({
     Blocks: DEFAULT_BLOCKS.Blocks,
     Styled,
     Link: Styled.a,
-    jsx: pragma(setElementId),
-    BLOCKS_Droppable: props => <BLOCKS_Droppable {...props} />,
-    BLOCKS_Draggable: props => (
-      <BLOCKS_Draggable active={props.draggableId === elementId} {...props} />
-    ),
-    BLOCKS_DraggableInner: props => <div {...props} />,
-    BLOCKS_DroppableInner: props => <div {...props} />,
-    BLOCKS_Text: props => <span {...props} />,
+    jsx: pragma,
+    BLOCKS_Droppable,
+    BLOCKS_Draggable,
+    BLOCKS_DraggableInner,
+    BLOCKS_DroppableInner,
     ...themeComponents,
     ...blocks,
     BLOCKS_Layout: layout
-  }
-
-  useEffect(() => {
-    setCode(codeWithUuids)
-  }, [])
-
-  useEffect(() => {
-    if (!elementId) {
-      return
-    }
-
-    const newElementData = queries.getCurrentElement(code, elementId)
-    setElementData(newElementData)
-
-    if (newElementData) {
-      setActiveTab(0)
-    }
-  }, [elementId, code])
-
-  useEffect(() => {
-    try {
-      const newTransformedCode = transforms.toTransformedJSX(code)
-      const newRawCode = transforms.toRawJSX(code, { blocks: srcBlocks })
-      const newSrcBlocks = queries.getBlocks(code)
-
-      setRawCode(newRawCode)
-      setSrcBlocks(newSrcBlocks)
-
-      if (newTransformedCode) {
-        setTransformedCode(newTransformedCode)
-      }
-
-      if (newRawCode) {
-        onChange(newRawCode)
-      }
-    } catch (e) {}
-  }, [code])
-
-  if (!code || !transformedCode) {
-    return null
   }
 
   const onDragEnd = drag => {
@@ -241,44 +197,38 @@ export default ({
   }
 
   return (
-    <Layout elementData={elementData} theme={appTheme}>
-      <Header />
-      <DragDropContext
-        onDragEnd={onDragEnd}
-        onBeforeDragStart={onBeforeDragStart}
-      >
-        <div
-          sx={{
-            display: 'flex',
-            height: 'calc(100vh - 43px)'
-          }}
+    <CodeProvider initialCode={initialCode}>
+      <Layout elementData={elementData} theme={appTheme}>
+        <Header />
+        <DragDropContext
+          onDragEnd={onDragEnd}
+          onBeforeDragStart={onBeforeDragStart}
         >
-          <Canvas
-            code={rawCode}
-            transformedCode={transformedCode}
-            scope={scope}
-            theme={theme}
-          />
-          <SidePanel
-            activeTab={activeTab}
-            setActiveTab={setActiveTab}
-            blocks={blocks}
-            srcBlocks={srcBlocks}
-            theme={theme}
-            setTheme={setTheme}
-            elementData={elementData}
-            handleChange={handleChange}
-            handlePropChange={handlePropChange}
-            handleRemove={handleRemove}
-            handleRemoveElement={handleRemoveElement}
-            handleParentSelect={handleParentSelect}
-            handleInsertElement={handleInsertElement}
-            handleClone={handleClone}
-            handleTextUpdate={handleTextUpdate}
-            setElementId={setElementId}
-          />
-        </div>
-      </DragDropContext>
-    </Layout>
+          <div
+            sx={{
+              display: 'flex',
+              height: 'calc(100vh - 43px)'
+            }}
+          >
+            <Canvas scope={scope} theme={theme} />
+            <SidePanel
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+              blocks={blocks}
+              theme={theme}
+              setTheme={setTheme}
+              handleChange={handleChange}
+              handlePropChange={handlePropChange}
+              handleRemove={handleRemove}
+              handleRemoveElement={handleRemoveElement}
+              handleParentSelect={handleParentSelect}
+              handleInsertElement={handleInsertElement}
+              handleClone={handleClone}
+              handleTextUpdate={handleTextUpdate}
+            />
+          </div>
+        </DragDropContext>
+      </Layout>
+    </CodeProvider>
   )
 }

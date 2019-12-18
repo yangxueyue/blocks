@@ -63,7 +63,7 @@ const FieldGroup = props => (
 )
 
 export default ({
-  propertyControls,
+  propertyControls = {},
   elementData,
   onChange,
   onPropChange,

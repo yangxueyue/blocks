@@ -4,7 +4,7 @@ import * as Blocks from '@blocks/react/src'
 
 const JSX = `
 import React from 'react'
-import { HeaderBasic } from '@blocks/react'
+import { Blocks, HeaderBasic } from '@blocks/react'
 
 export default () => (
   <Blocks.Root>
@@ -30,7 +30,7 @@ export default () => (
     blocks={Blocks}
     layout={Layout}
     onChange={code => {
-      //return
+      return null
       fetch('/___blocks', {
         method: 'POST',
         headers: {
@@ -44,8 +44,3 @@ export default () => (
     }}
   />
 )
-
-if (module.hot) {
-  module.hot.decline('./foo.js')
-  module.hot.accept('../../.cache/sync-requires.js')
-}
