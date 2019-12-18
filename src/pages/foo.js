@@ -1,5 +1,4 @@
 import React from 'react'
-import { Blocks, HeaderBasic } from '@blocks/react'
 export default () => (
   <Blocks.Root>
     <HeaderBasic>

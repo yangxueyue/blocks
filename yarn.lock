@@ -858,6 +858,13 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
+"@blocks/react@^0.0.48":
+  version "0.0.48"
+  resolved "https://registry.yarnpkg.com/@blocks/react/-/react-0.0.48.tgz#7f19ed08484b5eca3a7b06d072be0642223acb46"
+  integrity sha512-6ysErpIFdIA1Yp7MfOQNHnGrwsb15u4w+rvIU4tYAdFguBDvxOp0b3lqwRRd1mZVotPFrXU0EboJuBo3QSevPw==
+  dependencies:
+    property-controls "^0.0.48"
+
 "@cnakazawa/watch@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@cnakazawa/watch/-/watch-1.0.3.tgz#099139eaec7ebf07a27c1786a3ff64f39464d2ef"
@@ -3193,6 +3200,34 @@ bl@^3.0.0:
 blob@0.0.5:
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/blob/-/blob-0.0.5.tgz#d680eeef25f8cd91ad533f5b01eed48e64caf683"
+
+blocks-ui@^0.0.48:
+  version "0.0.48"
+  resolved "https://registry.yarnpkg.com/blocks-ui/-/blocks-ui-0.0.48.tgz#e863cec603e482328b8cb93c8a4dd16932ea0b90"
+  integrity sha512-3hb0ITg5R/wAh9Vj/CrOja3Y5bWH6C5lssWVlZ3uzmaPMvsJ+aOPfMkK+7uOpO9tla0tuemBpKgb88EwvosdLA==
+  dependencies:
+    "@babel/plugin-syntax-jsx" "^7.7.4"
+    "@babel/plugin-transform-react-jsx" "^7.7.4"
+    "@babel/standalone" "^7.7.4"
+    "@babel/template" "^7.7.4"
+    "@blocks/react" "^0.0.48"
+    "@emotion/cache" "^10.0.19"
+    "@emotion/core" "^10.0.22"
+    "@emotion/weak-memoize" "^0.2.4"
+    "@mdx-js/react" "^1.5.1"
+    "@reach/tabs" "^0.6.2"
+    "@theme-ui/components" "^0.2.50"
+    "@theme-ui/editor" "^0.2.51"
+    "@theme-ui/presets" "^0.2.44"
+    chroma-js "^2.1.0"
+    interpolate-range "^2.1.0"
+    lodash.merge "^4.6.2"
+    prettier "^1.19.1"
+    property-controls "^0.0.48"
+    react-beautiful-dnd "^12.1.1"
+    react-feather "^2.0.3"
+    react-merge-refs "^1.0.0"
+    theme-ui "^0.2.49"
 
 bluebird@^3.0.5, bluebird@^3.5.1, bluebird@^3.5.3, bluebird@^3.5.5, bluebird@^3.7.1:
   version "3.7.2"
@@ -10816,6 +10851,11 @@ prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.6.1, prop-types@^15.6.2,
     loose-envify "^1.4.0"
     object-assign "^4.1.1"
     react-is "^16.8.1"
+
+property-controls@^0.0.48:
+  version "0.0.48"
+  resolved "https://registry.yarnpkg.com/property-controls/-/property-controls-0.0.48.tgz#f4ddba544bc90b29b5d5f6bf39e9410f95b366f5"
+  integrity sha512-udRwB9Fp0Rrs1qkiyEvHyzXr86JfgrMXl/4Enbe6/xIJ8t7BKFZaS4g7bZ2LN7MStiQp8KBLWfJUlJSRX5yZxg==
 
 property-information@^5.0.0, property-information@^5.3.0:
   version "5.3.0"
