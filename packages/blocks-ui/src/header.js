@@ -100,7 +100,7 @@ const Theme = () => {
     >
       {colorMode === 'light' ? (
         <Moon
-          size={20}
+          size={18}
           sx={{
             position: 'relative',
             top: '1px',
@@ -110,7 +110,7 @@ const Theme = () => {
         />
       ) : (
         <Sun
-          size={20}
+          size={18}
           sx={{
             position: 'relative',
             top: '1px',
