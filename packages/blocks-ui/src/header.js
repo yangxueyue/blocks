@@ -1,6 +1,6 @@
 /** @jsx jsx */
-import { jsx } from 'theme-ui'
-import { Code, Layers, Monitor, Grid } from 'react-feather'
+import { jsx, useColorMode } from 'theme-ui'
+import { Code, Layers, Monitor, Grid, Sun, Moon } from 'react-feather'
 
 import pkg from '../package.json'
 
@@ -90,6 +90,39 @@ const ToolbarButton = ({ label, onClick, isActive, Icon }) => (
   </IconButton>
 )
 
+const Theme = () => {
+  const [colorMode, setColorMode] = useColorMode()
+  return (
+    <IconButton
+      onClick={() => {
+        setColorMode(colorMode === 'light' ? 'dark' : 'light')
+      }}
+    >
+      {colorMode === 'light' ? (
+        <Moon
+          size={20}
+          sx={{
+            position: 'relative',
+            top: '1px',
+            stroke: 'text'
+            // fill: 'text'
+          }}
+        />
+      ) : (
+        <Sun
+          size={20}
+          sx={{
+            position: 'relative',
+            top: '1px',
+            stroke: 'text'
+            // fill: 'text'
+          }}
+        />
+      )}
+    </IconButton>
+  )
+}
+
 const Header = () => (
   <header
     sx={{
@@ -141,6 +174,7 @@ const Header = () => (
     >
       <ToggleXRay />
       <Modes />
+      <Theme />
     </div>
   </header>
 )
