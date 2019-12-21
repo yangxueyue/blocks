@@ -4,9 +4,11 @@ import { Link } from 'gatsby'
 import { jsx, Styled } from 'theme-ui'
 import * as components from '@theme-ui/components'
 import { Global } from '@emotion/core'
-import * as blocks from '@blocks/react/src'
-import InlineRender from 'blocks-ui/dist/inline-render'
+
+import * as blocks from '@blocks/react'
+import { InlineRender } from 'blocks-ui'
 import * as controls from 'property-controls'
+
 import SEO from './seo'
 
 const { Container } = components
@@ -43,7 +45,8 @@ const PropertyControlsTable = ({ controls, name }) => (
   </Styled.table>
 )
 
-export default ({ block }) => {
+const Block = ({ block }) => {
+  /*eslint import/namespace: [2, { allowComputed: true }]*/
   const component = blocks[block.displayName]
 
   const components = Object.entries(component).reduce((acc, [key, val]) => {
@@ -163,3 +166,5 @@ export default ({ block }) => {
     </Styled.root>
   )
 }
+
+export default Block

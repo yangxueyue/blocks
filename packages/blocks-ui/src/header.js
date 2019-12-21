@@ -2,10 +2,12 @@
 import { jsx } from 'theme-ui'
 import { Code, Layers, Monitor, Grid } from 'react-feather'
 
-import { version } from '../package.json'
+import pkg from '../package.json'
 
 import { useEditor } from './editor-context'
 import { IconButton } from './ui'
+
+const { version } = pkg
 
 const modes = [
   {
@@ -101,7 +103,7 @@ const Header = () => (
     }}
   >
     <a
-      href="https://blocks-ui.com/"
+      href="/"
       sx={{
         textDecoration: 'none',
         color: 'inherit',

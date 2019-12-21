@@ -1498,8 +1498,8 @@ export const TagLineA = () => (
         What is a block?
       </Styled.h1>
       <Styled.p sx={{ m: 0, maxWidth: 600 }}>
-        A Block refers to a piece of content or a component. It's a section of
-        your content while a document is a collection of blocks.
+        A Block refers to a piece of content or a component. It&lsquo;s a
+        section of your content while a document is a collection of blocks.
       </Styled.p>
       <Styled.p sx={{ mb: 0, maxWidth: 600 }}>
         Blocks can be simple like a paragraph of text or even a box with a
@@ -1577,7 +1577,7 @@ export const TagLineEA = () => (
   <Box sx={{ backgroundColor: '#2B2D2D' }}>
     <Box sx={{ textAlign: 'center', py: [4, 5, 6], maxWidth: 800, mx: 'auto' }}>
       <Styled.h1 as="h3" sx={{ mt: 0, color: 'white' }}>
-        Let's do something great together
+        Let&lsquo;s do something great together
       </Styled.h1>
       <Button
         sx={{
@@ -1901,6 +1901,7 @@ export const HeroE = () => (
       }}
     >
       <img
+        alt="Lachlan Gowen building"
         src="https://assets.blocks-ui.com/lachlan-gowen-building.jpg"
         sx={{
           width: '100%'
@@ -1936,7 +1937,7 @@ export const HeroEA = () => (
         gives a unique, modern feel to your site.
       </Styled.p>
       <Styled.p sx={{ fontSize: [2, 3, 4], maxWidth: 500 }}>
-        It's a nice touch for minimal websites and stores.
+        It&lsquo;s a nice touch for minimal websites and stores.
       </Styled.p>
     </Box>
     <Box
@@ -1945,6 +1946,7 @@ export const HeroEA = () => (
       }}
     >
       <img
+        alt="Minh Pham interior"
         src="https://assets.blocks-ui.com/minh-pham-interior.jpg"
         sx={{
           width: '100%'
@@ -1970,6 +1972,7 @@ export const HeroEB = () => (
       }}
     >
       <img
+        alt="Minh Pham interior"
         src="https://assets.blocks-ui.com/minh-pham-interior.jpg"
         sx={{
           width: '100%'
@@ -2015,6 +2018,7 @@ export const HeroF = () => (
       <Button sx={{ backgroundColor: '#173383' }}>Give it a go</Button>
     </Box>
     <img
+      alt="house interior"
       src="https://assets.blocks-ui.com/house-interior.jpg"
       sx={{
         width: '100%'
@@ -2049,7 +2053,7 @@ export const HeroFA = () => (
           sx={{ fontSize: [2, 3, 4], my: 0, mx: 'auto', maxWidth: 540 }}
         >
           It often shows houses that are way cleaner than my own. How do those
-          blankets stay folded? I guess they don't have kids.
+          blankets stay folded? I guess they don&lsquo;t have kids.
         </Styled.p>
         <Box sx={{ py: 5 }}>
           <Button
@@ -2075,6 +2079,7 @@ export const HeroFA = () => (
       }}
     >
       <img
+        alt="Kara Eads interior"
         src="https://assets.blocks-ui.com/kara-eads-interior.jpg"
         sx={{
           mt: -7,
@@ -2115,6 +2120,7 @@ export const HeroG = () => (
       }}
     >
       <img
+        alt="Jude Beck plant"
         src="https://assets.blocks-ui.com/jude-beck-plant.jpg"
         sx={{
           width: '100%'
@@ -2143,7 +2149,7 @@ export const DescriptionA = () => (
           }
         }}
       >
-        It's pretty fun to turn JSX into a WYSIWYG.
+        It&lsquo;s pretty fun to turn JSX into a WYSIWYG.
       </Styled.h1>
       <footer sx={{ fontSize: 2 }}>&mdash; Me</footer>
     </Box>
@@ -2151,12 +2157,12 @@ export const DescriptionA = () => (
       <Styled.p sx={{ mt: 0, maxWidth: 600 }}>
         Blocks can be simple like a paragraph of text or a box with a tomato
         background color. They can be complex and contain state or even fetch
-        data. They're pre-built components that can be drag and dropped onto the
-        canvas.
+        data. They&lsquo;re pre-built components that can be drag and dropped
+        onto the canvas.
       </Styled.p>
       <Styled.p sx={{ maxWidth: 600 }}>
-        It's “low code” because you don't have to peek into the JSX until you
-        have bespoke needs.
+        It&lsquo;s “low code” because you don&lsquo;t have to peek into the JSX
+        until you have bespoke needs.
       </Styled.p>
       <Styled.p sx={{ maxWidth: 600 }}>
         Blocks are typically composed of multiple components which allows you to
@@ -2835,6 +2841,8 @@ export const H4 = () => (
 )
 export const P = () => (
   <div>
-    <Styled.p sx={{ maxWidth: 320 }}>Here's an awesome paragraph</Styled.p>
+    <Styled.p sx={{ maxWidth: 320 }}>
+      Here&lsquo;s an awesome paragraph
+    </Styled.p>
   </div>
 )
