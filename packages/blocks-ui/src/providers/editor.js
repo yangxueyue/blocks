@@ -37,3 +37,5 @@ export const EditorProvider = ({ children }) => {
     </EditorContext.Provider>
   )
 }
+
+export default EditorProvider

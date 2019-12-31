@@ -6,7 +6,7 @@ import EditorPanel from './editor-panel'
 import ThemePanel from './theme-panel'
 import BlocksListing from './blocks-listing'
 import TreeView from './tree-view'
-import { useCode } from './code-context'
+import { useCode } from './providers/code'
 
 export default ({ activeTab, setActiveTab, blocks, theme, setTheme }) => {
   const {

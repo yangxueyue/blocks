@@ -8,7 +8,7 @@ import { IconButton } from './ui'
 
 import TreeView from './tree-view'
 import PropertyControlsPanel from './property-controls-panel'
-import { useCode } from './code-context'
+import { useCode } from './providers/code'
 
 // TODO: Fix this prop drilling dance for common editor
 // interactions.

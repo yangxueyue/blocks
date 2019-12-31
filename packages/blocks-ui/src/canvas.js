@@ -3,8 +3,8 @@ import { jsx, Styled } from 'theme-ui'
 import prettier from 'prettier/standalone'
 import parserJS from 'prettier/parser-babylon'
 
-import { useEditor } from './editor-context'
-import { useCode } from './code-context'
+import { useEditor } from './providers/editor'
+import { useCode } from './providers/code'
 import InlineRender from './inline-render'
 import { PreviewArea, Device } from './device-preview'
 

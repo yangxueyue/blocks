@@ -1,7 +1,7 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 
-import * as queries from './queries'
-import * as transforms from './transforms'
+import * as queries from '../queries'
+import * as transforms from '../transforms'
 
 const CodeContext = React.createContext({})
 
@@ -60,7 +60,6 @@ export const CodeProvider = ({ children, initialCode }) => {
   }
 
   const cloneCurrentElement = () => {
-    console.log('hiiiiiiiiiiiiiiii')
     const { code } = transforms.cloneElement(codeState.code, {
       elementId: codeState.currentElementId
     })
@@ -89,10 +88,51 @@ export const CodeProvider = ({ children, initialCode }) => {
     })
   }
 
+  const insertText = e => {
+    const text = e.target.value
+    const currentElementData = { ...codeState.currentElementData, text }
+    const { code } = transforms.replaceText(codeState.code, {
+      text,
+      elementId: codeState.currentElementId
+    })
+
+    setCodeState({
+      ...codeState,
+      ...updateCode(code),
+      currentElementData
+    })
+  }
+
+  const updateProp = (key, e) => {
+    const value = e.target.value
+
+    const currentElementData = {
+      ...codeState.currentElementData,
+      props: {
+        ...codeState.currentElementData.props,
+        [key]: value
+      }
+    }
+
+    const { code } = transforms.applyProp(codeState.code, {
+      elementId: codeState.currentElementId,
+      key,
+      value
+    })
+
+    setCodeState({
+      ...codeState,
+      ...updateCode(code),
+      currentElementData
+    })
+  }
+
   return (
     <CodeContext.Provider
       value={{
         ...codeState,
+        insertText,
+        updateProp,
         setCurrentElementId,
         removeCurrentElement,
         cloneCurrentElement,

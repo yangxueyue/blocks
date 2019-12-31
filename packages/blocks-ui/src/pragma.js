@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
 
-import { useCode } from './code-context'
+import { useCode } from './providers/code'
 import { uuidName } from './constants'
 
 const IGNORED_TYPES = ['path']
