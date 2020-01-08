@@ -12,11 +12,9 @@ import * as transforms from './transforms'
 import { useEditor } from './providers/editor'
 import pragma from './pragma'
 
-import Header from './header'
 import Canvas from './canvas'
 import Layout from './layout'
 import SidePanel from './side-panel'
-import appTheme from './theme'
 
 const BLOCKS_Droppable = props => {
   const { mode } = useEditor()
@@ -59,8 +57,6 @@ const defaultTheme = {
   ...systemTheme,
   breakpoints: [360, 600, 1024]
 }
-
-console.log(DEFAULT_BLOCKS.HeaderLogo.toString())
 
 export default ({
   src: initialCode,
