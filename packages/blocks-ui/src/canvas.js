@@ -11,6 +11,7 @@ import { PreviewArea, Device } from './device-preview'
 import { Clipboard, Check } from 'react-feather'
 import { IconButton } from './ui'
 import useCopyToClipboard from './use-copy-to-clipboard'
+import { useScope } from './providers/scope'
 
 const Wrap = props => (
   <div
@@ -43,8 +44,9 @@ const Copy = ({ toCopy }) => {
 }
 
 export default ({ scope, theme }) => {
-  const { mode } = useEditor()
+  const { theme, ...scope } = useScope()
   const { code, transformedCode } = useCode()
+  const { mode } = useEditor()
   const formattedCode = prettier.format(code, {
     parser: 'babel',
     plugins: [parserJS]

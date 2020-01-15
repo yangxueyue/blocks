@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react'
+import { DragDropContext } from 'react-beautiful-dnd'
 
 import * as queries from '../queries'
 import * as transforms from '../transforms'
@@ -127,20 +128,81 @@ export const CodeProvider = ({ children, initialCode }) => {
     })
   }
 
-  return (
-    <CodeContext.Provider
-      value={{
+  const updateSxProp = newSx => {
+    const sx = currentElementData.props.sx || {}
+
+    const newElementData = {
+      ...currentElementData,
+      props: { ...currentElementData.props, sx: { ...sx, ...newSx } }
+    }
+
+    const { code } = transforms.applySxProp(code, {
+      elementId,
+      sx: newSx
+    })
+
+    setCodeState({
+      ...codeState,
+      ...updateCode(code),
+      currentElementData
+    })
+  }
+
+  const onDragEnd = drag => {
+    if (!drag.destination || drag.destination.droppableId === 'components') {
+      return
+    }
+
+    if (
+      drag.destination === 'root' &&
+      drag.source.index === drag.destination.index
+    ) {
+      return
+    }
+
+    if (drag.source.droppableId === 'components') {
+      const code = transforms.insertJSXBlock(code, { ...drag, blocks })
+      setCodeState({
         ...codeState,
-        insertText,
-        updateProp,
-        setCurrentElementId,
-        removeCurrentElement,
-        cloneCurrentElement,
-        selectParentofCurrentElement
-      }}
+        ...updateCode(code),
+        currentElementData
+      })
+    } else if (drag.source.droppableId.startsWith('element-')) {
+      console.log(drag)
+    } else {
+      const code = transforms.reorderJSXBlocks(code, drag)
+      setCodeState({
+        ...codeState,
+        ...updateCode(code),
+        currentElementData
+      })
+    }
+  }
+
+  const onBeforeDragStart = drag => {
+    setCurrentElementId(drag.draggableId)
+  }
+
+  return (
+    <DragDropContext
+      onDrageEnd={onDragEnd}
+      onBeforeDragStart={onBeforeDragStart}
     >
-      {children}
-    </CodeContext.Provider>
+      <CodeContext.Provider
+        value={{
+          ...codeState,
+          insertText,
+          updateProp,
+          setCurrentElementId,
+          removeCurrentElement,
+          cloneCurrentElement,
+          selectParentofCurrentElement,
+          updateSxProp
+        }}
+      >
+        {children}
+      </CodeContext.Provider>
+    </DragDropContext>
   )
 }
 
