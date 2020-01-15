@@ -6,14 +6,17 @@ import EditorProvider from './editor'
 import ThemeEditorProvider from './theme-editor'
 import ElementProvider from './element'
 import ScopeProvider from './scope'
+import BlocksProvider from './blocks'
 
-export default ({ initialCode, scope, children, theme, appTheme }) => (
+export default ({ initialCode, blocks, scope, children, theme, appTheme }) => (
   <ThemeProvider theme={appTheme}>
     <EditorProvider>
       <ElementProvider>
         <ThemeEditorProvider theme={theme}>
           <CodeProvider initialCode={initialCode}>
-            <ScopeProvider scope={scope}>{children}</ScopeProvider>
+            <BlocksProvider blocks={blocks}>
+              <ScopeProvider scope={scope}>{children}</ScopeProvider>
+            </BlocksProvider>
           </CodeProvider>
         </ThemeEditorProvider>
       </ElementProvider>

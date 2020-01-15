@@ -1,14 +1,13 @@
 /** @jsx jsx */
-import React from 'react'
 import { jsx } from 'theme-ui'
-import { Label, Input, Flex } from '@theme-ui/components'
+import { Flex } from '@theme-ui/components'
 import { Trash, CornerRightUp, Copy, List } from 'react-feather'
 
-import { IconButton } from './ui'
+import { IconButton } from '../ui'
 
-import TreeView from './tree-view'
-import PropertyControlsPanel from './property-controls-panel'
-import { useCode } from './providers/code'
+import TreeView from '../tree-view'
+import PropertyControlsPanel from './property-controls'
+import { useCode } from '../providers/code'
 
 // TODO: Fix this prop drilling dance for common editor
 // interactions.

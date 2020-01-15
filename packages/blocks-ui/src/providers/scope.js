@@ -1,17 +1,13 @@
 import React, { useContext } from 'react'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
-import * as DEFAULT_BLOCKS from '@blocks/react'
+import { Blocks } from '@blocks/react'
 import * as themeComponents from '@theme-ui/components'
 import { Styled } from 'theme-ui'
-import { system as systemTheme } from '@theme-ui/presets'
 
 import jsx from '../pragma'
 import { useEditor } from './editor'
-
-const DEFAULT_THEME = {
-  ...systemTheme,
-  breakpoints: [360, 600, 1024]
-}
+import { useBlocks } from './blocks'
+import { useThemeEditor } from './theme-editor'
 
 const BLOCKS_Droppable = props => {
   const { mode } = useEditor()
@@ -52,15 +48,14 @@ const BLOCKS_DraggableInner = props => <div {...props} />
 
 const DEFAULT_SCOPE = {
   ...themeComponents,
-  Blocks: DEFAULT_BLOCKS.Blocks,
+  Blocks,
   Styled,
   Link: Styled.a,
   jsx,
   BLOCKS_Droppable,
   BLOCKS_Draggable,
   BLOCKS_DraggableInner,
-  BLOCKS_DroppableInner,
-  theme: DEFAULT_THEME
+  BLOCKS_DroppableInner
 }
 
 const ScopeContext = React.createContext({})
@@ -73,10 +68,15 @@ export const useScope = () => {
 export const ScopeProvider = ScopeContext.Provider
 
 export default ({ scope, children }) => {
+  const blocks = useBlocks()
+  const { update, ...theme } = useThemeEditor()
+
   const fullScope = {
     BLOCKS_Layout: scope.layout,
     ...DEFAULT_SCOPE,
-    ...scope
+    ...scope,
+    ...blocks,
+    theme
   }
 
   return (

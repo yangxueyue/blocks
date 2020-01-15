@@ -2,18 +2,16 @@
 import { jsx } from 'theme-ui'
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@reach/tabs'
 
-import EditorPanel from './editor-panel'
-import ThemePanel from './theme-panel'
+import EditorPanel from './editor'
+import ThemePanel from './theme'
 import BlocksListing from './blocks-listing'
-import TreeView from './tree-view'
-import { useCode } from './providers/code'
+import TreeView from '../tree-view'
+import { useCode } from '../providers/code'
+import { useEditor } from '../providers/editor'
 
-export default ({ activeTab, setActiveTab, blocks, theme, setTheme }) => {
-  const {
-    setCurrentElementId: setElementId,
-    currentElementData: elementData,
-    blocks: srcBlocks
-  } = useCode()
+export default () => {
+  const { activeTab, activeTabIndex, updateActiveTab } = useEditor()
+  const { currentElementData: elementData } = useCode()
 
   return (
     <section
@@ -27,7 +25,7 @@ export default ({ activeTab, setActiveTab, blocks, theme, setTheme }) => {
         pb: 3
       }}
     >
-      <Tabs index={activeTab} onChange={index => setActiveTab(index)}>
+      <Tabs index={activeTabIndex} onChange={index => updateActiveTab(index)}>
         <TabList
           sx={{
             display: 'flex',
@@ -39,8 +37,8 @@ export default ({ activeTab, setActiveTab, blocks, theme, setTheme }) => {
           <Tab
             sx={{
               ...baseTabStyles,
-              borderColor: activeTab === 0 ? 'transparent' : 'border',
-              backgroundColor: activeTab === 0 ? null : '#fafafa'
+              borderColor: activeTab === 'editor' ? 'transparent' : 'border',
+              backgroundColor: activeTab === 'editor' ? null : '#fafafa'
             }}
           >
             Editor
@@ -50,8 +48,9 @@ export default ({ activeTab, setActiveTab, blocks, theme, setTheme }) => {
               ...baseTabStyles,
               borderLeft: '1px solid',
               borderRight: '1px solid',
-              borderColor: activeTab === 1 ? 'transparent' : 'border',
-              backgroundColor: activeTab === 1 ? null : '#fafafa'
+              borderColor:
+                activeTab === 'components' ? 'transparent' : 'border',
+              backgroundColor: activeTab === 'components' ? null : '#fafafa'
             }}
           >
             Components
@@ -59,8 +58,8 @@ export default ({ activeTab, setActiveTab, blocks, theme, setTheme }) => {
           <Tab
             sx={{
               ...baseTabStyles,
-              borderColor: activeTab === 2 ? 'transparent' : 'border',
-              backgroundColor: activeTab === 2 ? null : '#fafafa'
+              borderColor: activeTab === 'theme' ? 'transparent' : 'border',
+              backgroundColor: activeTab === 'theme' ? null : '#fafafa'
             }}
           >
             Theme
@@ -69,7 +68,7 @@ export default ({ activeTab, setActiveTab, blocks, theme, setTheme }) => {
         <TabPanels>
           <TabPanel>
             {elementData ? (
-              <EditorPanel blocks={blocks} />
+              <EditorPanel />
             ) : (
               <div>
                 <h3
@@ -86,17 +85,15 @@ export default ({ activeTab, setActiveTab, blocks, theme, setTheme }) => {
                 >
                   Canvas
                 </h3>
-                <TreeView children={srcBlocks} onSelect={setElementId} />
+                <TreeView />
               </div>
             )}
           </TabPanel>
           <TabPanel>
-            {activeTab === 1 ? (
-              <BlocksListing components={blocks} theme={theme} />
-            ) : null}
+            {activeTab === 'components' ? <BlocksListing /> : null}
           </TabPanel>
           <TabPanel>
-            <ThemePanel theme={theme} setTheme={setTheme} />
+            <ThemePanel />
           </TabPanel>
         </TabPanels>
       </Tabs>

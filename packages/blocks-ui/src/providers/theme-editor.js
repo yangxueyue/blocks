@@ -1,4 +1,10 @@
 import React, { useState, useContext } from 'react'
+import { system as systemTheme } from '@theme-ui/presets'
+
+const DEFAULT_THEME = {
+  ...systemTheme,
+  breakpoints: [360, 600, 1024]
+}
 
 const ThemeEditorContext = React.createContext({})
 
@@ -8,7 +14,7 @@ export const useThemeEditor = () => {
   return value
 }
 
-export const ThemeEditorProvider = ({ theme = {}, children }) => {
+export const ThemeEditorProvider = ({ theme = DEFAULT_THEME, children }) => {
   const [value, update] = useState(theme)
 
   return (

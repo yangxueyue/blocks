@@ -6,19 +6,21 @@ import Editor from './editor'
 import appTheme from './theme'
 
 export default ({
-  src: initialCode,
-  blocks: providedBlocks,
+  src,
+  blocks,
   theme = {},
   props = {},
+  scope = {},
   layout = 'div',
   onChange
 }) => (
   <Providers
-    initialCode={initialCode}
+    initialCode={src}
+    blocks={blocks}
     theme={theme}
     appTheme={appTheme}
     scope={{
-      ...providedBlocks,
+      ...scope,
       props,
       layout
     }}

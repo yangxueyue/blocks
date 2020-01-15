@@ -4,8 +4,8 @@ import { Droppable, Draggable } from 'react-beautiful-dnd'
 import { jsx, ThemeProvider } from 'theme-ui'
 import { Box } from '@theme-ui/components'
 
-import { useEditor } from './providers/editor'
-import InlineBlockRender from './inline-block-render'
+import { useEditor } from '../providers/editor'
+import InlineBlockRender from '../inline-block-render'
 
 const isBlocksRoot = component =>
   component.Root && Object.keys(component).length === 1

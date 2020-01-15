@@ -43,7 +43,7 @@ const Copy = ({ toCopy }) => {
   )
 }
 
-export default ({ scope, theme }) => {
+export default () => {
   const { theme, ...scope } = useScope()
   const { code, transformedCode } = useCode()
   const { mode } = useEditor()

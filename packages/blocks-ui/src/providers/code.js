@@ -129,15 +129,15 @@ export const CodeProvider = ({ children, initialCode }) => {
   }
 
   const updateSxProp = newSx => {
-    const sx = currentElementData.props.sx || {}
+    const sx = codeState.currentElementData.props.sx || {}
 
-    const newElementData = {
-      ...currentElementData,
-      props: { ...currentElementData.props, sx: { ...sx, ...newSx } }
+    const currentElementData = {
+      ...codeState.currentElementData,
+      props: { ...codeState.currentElementData.props, sx: { ...sx, ...newSx } }
     }
 
     const { code } = transforms.applySxProp(code, {
-      elementId,
+      elementId: codeState.currentElementId,
       sx: newSx
     })
 
@@ -161,11 +161,13 @@ export const CodeProvider = ({ children, initialCode }) => {
     }
 
     if (drag.source.droppableId === 'components') {
-      const code = transforms.insertJSXBlock(code, { ...drag, blocks })
+      const code = transforms.insertJSXBlock(code, {
+        ...drag,
+        blocks: codeState.blocks
+      })
       setCodeState({
         ...codeState,
-        ...updateCode(code),
-        currentElementData
+        ...updateCode(code)
       })
     } else if (drag.source.droppableId.startsWith('element-')) {
       console.log(drag)
@@ -173,8 +175,7 @@ export const CodeProvider = ({ children, initialCode }) => {
       const code = transforms.reorderJSXBlocks(code, drag)
       setCodeState({
         ...codeState,
-        ...updateCode(code),
-        currentElementData
+        ...updateCode(code)
       })
     }
   }
